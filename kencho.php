@@ -8,7 +8,7 @@
                     '神奈川県' => '横浜');
 
   $prefs = array('北海道', '青森県', '岩手県', '宮城県', '栃木県', '群馬県', '神奈川県');
-  $ken = $prefs[rand(0, 6)];
+  $ken = $prefs[rand(0, count($prefs)-1)];
   print($ken . "の県庁所在地は？\n");
   $answer = trim(fgets(STDIN));
   foreach ($questions as $key => $value) {
