@@ -22,7 +22,10 @@ for ($i = count($list); $i >= 1; $i--) {
     }
   }
 }
-foreach (array_unique($list) as $val) {
-  $result[] = $val;
+foreach ($list as $key => $val) {
+  if ($key == 0 || $tmp != $val) {
+    $result[] = $val;
+    $tmp = $val;
+  }
 }
 print($result[2] . "\n");
