@@ -1,11 +1,11 @@
 <?php
-function createMsg($name, $price) {
-  $msg = <<< EOM
-  {$name}様
-  ご注文を承りました。
-  合計{$price}円です。\n
-  EOM;
-  echo $msg;
+if ('POST' == $_SERVER['REQUEST_METHOD']) {
+  print("Hello, " . $_POST['my_name']);
+} else {
+  print<<<_HTML_
+  <form method="post" action="$_SERVER[PHP_SELF]">
+  <br>
+  <input type="submit" value="Say Hello">
+  </form>
+  _HTML_;
 }
-
-createMsg("三浦", 3000);
