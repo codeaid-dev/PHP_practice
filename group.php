@@ -17,13 +17,16 @@ for ($i = 0; $i < $list_cnt; $i++) {
   }
   if (empty($list)) break;
 }
-echo "<ul>";
+//echo "<ul>";
 foreach ($groups as $group) {
-  echo "<li>" . "[";
+  //echo "<li>" . "[";
+  print("[");
   foreach ($group as $val) {
     echo $val;
   }
-  echo "]" . "</li>";
+  //echo "]" . "</li>";
+  print("]\n");
 }
-echo "</ul>";
+//echo "</ul>";
+var_dump($groups);
 ?>
