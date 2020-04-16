@@ -17,10 +17,8 @@ $profile = array('EOS R' => array('メーカー' => 'Canon',
                                 '手ブレ補正' => 'ボディ・レンズ'));
 
 foreach ($profile as $person => $data) {
-  //echo $person . "<br>";
   print($person . "\n");
   foreach ($data as $param => $detail) {
-    //echo $param . ": " . $detail . "<br>";
     print($param . ": " . $detail . "\n");
   }
 }

@@ -1,6 +1,5 @@
 <?php
 $list = [1,2,3,'a','b','c',1,2,3,'a','b','c',1,2,3,'a','b','c'];
-$groups = [];
 $list_cnt = count($list);
 for ($i = 0; $i < $list_cnt; $i++) {
   for ($j = $i+1; $j < $list_cnt; $j++) {
@@ -28,5 +27,5 @@ foreach ($groups as $group) {
   print("]\n");
 }
 //echo "</ul>";
-var_dump($groups);
+//var_dump($groups);
 ?>

@@ -1,4 +1,5 @@
 <?php
+/*
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
   print("Hello, " . $_POST['my_name']);
 } else {
@@ -9,3 +10,12 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
   </form>
   _HTML_;
 }
+*/
+$list = [1,1,4,2,2];
+for ($i = 0; $i < count($list); $i++) {
+  $key = $list[$i];
+  if ($counts[$key]) $counts[$key] += 1;
+  else $counts[$key] = 1;
+}
+var_dump($list);
+var_dump($counts);
