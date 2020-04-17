@@ -51,7 +51,7 @@ do {
   for ($i = 0; $i < 5; $i++) {
     $cards[] = rand(1, 13);
   }
-  $count1 = array_count_values($cards);
+  $check = array_count_values($cards);
 } while (in_array(5, $check));
 
 print(implode(" ", $cards) . "\n");
@@ -61,7 +61,7 @@ $pair = 0;
 $three_card = 0;
 $four_card = 0;
 
-foreach ($count1 as $key => $val) {
+foreach ($check as $key => $val) {
   if ($val == 2) $pair++;
   if ($val == 3) $three_card++;
   if ($val == 4) $four_card++;
@@ -76,14 +76,14 @@ else print("ノーハンド");
 print("\n");
 
 // 解答例3
-if (in_array(4, $count1)) print("フォーカード");
-else if (in_array(3, $count1)){
-  if (in_array(2, $count1)) print("フルハウス");
+if (in_array(4, $check)) print("フォーカード");
+else if (in_array(3, $check)){
+  if (in_array(2, $check)) print("フルハウス");
   else print("スリーカード");
 } else {
-  $count2 = array_count_values($count1);
-  if (in_array(2, $count2)) print("ツーペア");
-  else if (in_array(3, $count2)) print("ワンペア");
+  $check2 = array_count_values($check);
+  if (in_array(2, $check2)) print("ツーペア");
+  else if (in_array(3, $check2)) print("ワンペア");
   else print("ノーハンド");
 }
 print("\n");
