@@ -19,3 +19,12 @@ for ($i = 0; $i < count($list); $i++) {
 }
 var_dump($list);
 var_dump($counts);
+
+$d = array(null);
+var_dump($d);
+
+$item = "タピオカ";
+print "{$item}ドリンクが飲みたいです。<br>";
+
+$ids = "id_01,id_02,id_03,id_04,";
+print substr($ids, 0, -1);
