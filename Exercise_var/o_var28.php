@@ -1,7 +1,9 @@
 <?php
-print "ユーザー名は？";
-$user = trim(fgets(STDIN));
-print "ドメインは？";
-$domain = trim(fgets(STDIN));
-print "あなたのメールアドレス：" . $user . "@" . $domain . "\n";
+print "お名前は？";
+$name = trim(fgets(STDIN));
+$msg = <<< EOM
+{$name}様
+ご注文を承りました。\n
+EOM;
+echo $msg;
 ?>

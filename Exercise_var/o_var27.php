@@ -1,5 +1,7 @@
 <?php
-print "お名前は？";
-$name = trim(fgets(STDIN));
-print "お名前：" . $name . "\n";
+print "ユーザー名は？";
+$user = trim(fgets(STDIN));
+print "ドメインは？";
+$domain = trim(fgets(STDIN));
+print "あなたのメールアドレス：" . $user . "@" . $domain . "\n";
 ?>
