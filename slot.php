@@ -12,7 +12,7 @@ function slot() {
   // 同じ要素の数を数える
   for ($i = 0; $i < count($slot); $i++) {
     $key = $slot[$i];
-    if ($result[$key]) $result[$key] += 1;
+    if (!empty($result[$key])) $result[$key] += 1;
     else $result[$key] = 1;
   }
   //$result = array_count_values($slot); // この関数を使えば上記処理と同じ結果を出せる
