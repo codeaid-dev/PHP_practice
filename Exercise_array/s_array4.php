@@ -1,6 +1,8 @@
 <?php
-$month = array("January"=>"1月","February"=>"2月","March"=>"3月","April"=>"4月","May"=>"5月","June"=>"6月","July"=>"7月","August"=>"8月","September"=>"9月","October"=>"10月","November"=>"11月","December"=>"12月");
-foreach ($month as $key => $value) {
-  print $key . "は" . $value . "です\n";
+$name = ["はるき", "かおる", "ひでと", "まさとし", "たかのり"];
+for ($i = 0; $i < count($name); $i++) {
+  if ($name[$i] == "まさとし") {
+    print $name[$i] . "のキーは" . $i . "です";
+  }
 }
 ?>

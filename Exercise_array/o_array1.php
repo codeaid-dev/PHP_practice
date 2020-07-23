@@ -6,7 +6,5 @@ for ($i = 0; $i < 5 && $sum <= 100; $i++) {
   $num[$i] = trim(fgets(STDIN));
   $sum += $num[$i];
 }
-for ($j = 0; $j < $i; $j++) {
-  print $num[$j] . "\n";
-}
+print implode(",", $num);
 ?>

@@ -1,8 +1,5 @@
 <?php
-$name = ["はるき", "かおる", "ひでと", "まさとし", "たかのり"];
-for ($i = 0; $i < count($name); $i++) {
-  if ($name[$i] == "まさとし") {
-    print $name[$i] . "のキーは" . $i . "です";
-  }
-}
+$teams = array("阪神", "巨人", "ヤクルト");
+array_push($teams, "DeNA", "中日", "広島");
+var_dump($teams);
 ?>
