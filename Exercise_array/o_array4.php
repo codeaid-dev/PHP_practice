@@ -5,5 +5,5 @@ $nums = explode(",", $str);
 for ($i = 0; $i < count($nums)-1; $i++) {
   $result[] = $nums[$i] + $nums[$i+1];
 }
-print implode(",", $result) . "\n";
+print "結果：" . implode(",", $result) . "\n";
 ?>
