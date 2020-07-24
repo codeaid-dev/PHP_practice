@@ -46,6 +46,7 @@ print("\n");
 /**
  * 解答例2, 3
  */
+/*
 do {
   $cards = [];
   for ($i = 0; $i < 5; $i++) {
@@ -87,3 +88,4 @@ else if (in_array(3, $check)){
   else print("ノーハンド");
 }
 print("\n");
+*/

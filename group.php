@@ -19,13 +19,13 @@ for ($i = 0; $i < $list_cnt; $i++) {
 //echo "<ul>";
 foreach ($groups as $group) {
   //echo "<li>" . "[";
-  print("[");
+  print "[";
   foreach ($group as $val) {
-    echo $val;
+    print $val;
   }
   //echo "]" . "</li>";
-  print("]\n");
+  print "]\n";
 }
 //echo "</ul>";
-//var_dump($groups);
+var_dump($groups);
 ?>
