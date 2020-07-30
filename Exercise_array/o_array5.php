@@ -4,11 +4,18 @@ for ($i=0; $i<50; $i++) {
 }
 $result = [];
 for ($i = 0; $i < count($nums); $i++) {
+  if (!array_key_exists($nums[$i], $result)) {
+    $result[$nums[$i]] = 1;
+  } else {
+    $result[$nums[$i]]++;
+  }
+/*
   if (!isset($result[$nums[$i]])) {
     $result[$nums[$i]] = 1;
   } else {
     $result[$nums[$i]]++;
   }
+*/
 }
 foreach ($result as $key => $value) {
   print $key . "は" . $value . "個\n";

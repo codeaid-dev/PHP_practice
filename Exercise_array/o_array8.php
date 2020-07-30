@@ -1,22 +1,17 @@
 <?php
-$total = 0;
 for ($i = 0; $i < 5; $i++) {
-  $nums[] = rand(1,10);
-  $total += $nums[$i];
+  $nums[] = rand(-10,10);
 }
 print implode(" ", $nums) . "\n";
-print "合計値：" . $total . "\n";
-$average = $total / count($nums);
-print "平均値：" . $average . "\n";
-$big = "平均値以上：";
-$small = "平均値未満：";
+$big = 0;
+$small = 0;
+$zero = 0;
 for ($i = 0; $i < count($nums); $i++) {
-  if ($nums[$i] >= $average) {
-    $big .= $nums[$i] . " ";
-  } else {
-    $small .= $nums[$i] . " ";
-  }
+  if ($nums[$i] > 0) $big++;
+  else if ($nums[$i] < 0) $small++;
+  else $zero++;
 }
-print $big . "\n";
-print $small . "\n";
+print "0より大きい数の個数：" . $big . "\n";
+print "0より小さい数の個数：" . $small . "\n";
+print "0の個数：" . $zero . "\n";
 ?>

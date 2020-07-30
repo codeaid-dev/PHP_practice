@@ -1,12 +1,12 @@
 <?php
 for ($i = 0; $i < 5; $i++) {
-  $nums[] = rand(1,10);
+  $nums[] = rand(1,20);
 }
-print implode(" ", $nums) . "\n";
-for ($i = 0; $i < count($nums); $i++) {
-  for ($w = 1; $w <= $nums[$i]; $w++) {
-    print "*";
-  }
-  print "\n";
+print "入力：";
+$num = trim(fgets(STDIN));
+if (in_array($num, $nums)) {
+  print "ありました\n";
+} else {
+  print "ないです\n";
 }
 ?>
