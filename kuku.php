@@ -11,7 +11,6 @@ for ($x = 1; $x < 10; $x++) {
   //echo "<br>";
   echo "\n";
 }
-
 // 解答例2
 foreach (range(1, 9) as $x) {
   foreach (range(1, 9) as $y) {
@@ -23,5 +22,12 @@ foreach (range(1, 9) as $x) {
   }
   print("\n");
 }
-
+// 解答例3
+foreach (range(1, 9) as $x) {
+  foreach (range(1, 9) as $y) {
+    $kuku[] = $x . "x" . $y . "=" . $x * $y;
+  }
+  print implode(",", $kuku) . "\n";
+  $kuku = [];
+}
 ?>
