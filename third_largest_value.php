@@ -1,5 +1,5 @@
 <?php
-/*
+
 // 解答例１
 print("数値を入力：");
 $list = array_map('intval', explode(',', trim(fgets(STDIN))));
@@ -8,7 +8,6 @@ foreach (array_unique($list) as $val) {
   $result[] = $val;
 }
 print($result[2] . "\n");
-*/
 
 // 解答例２
 print("数値を入力：");
