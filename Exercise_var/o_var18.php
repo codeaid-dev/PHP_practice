@@ -1,5 +1,7 @@
 <?php
-$min = -94;
-$max = 54;
-printf("地球で観測上の最高気温は%+d度で、最低気温は%+d度です。", $max, $min);
+print "ユーザー名は？";
+$user = trim(fgets(STDIN));
+print "ドメインは？";
+$domain = trim(fgets(STDIN));
+print "あなたのメールアドレス：" . $user . "@" . $domain . "\n";
 ?>

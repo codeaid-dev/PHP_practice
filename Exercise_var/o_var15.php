@@ -1,7 +1,8 @@
 <?php
-$name = "佐藤しおり";
-$title = "ごあいさつ";
-$name .= "と申します。<br>よろしくお願いします。";
-print "件名：" . $title . "<br>";
-print $name;
+$str = "「       」の半角空白を削除<br>";
+$str = str_replace(" ", "", $str);
+print $str;
+$str = "「　　　　」の全角空白を削除<br>";
+$str = str_replace("　", "", $str);
+print $str;
 ?>

@@ -1,14 +1,5 @@
 <?php
-$str = <<<HTML
-<html>
-<head><title>ポーカーの役</title></head>
-<body>
-<ul>
-  <li>ワンペア</li>
-  <li>ツーペア</li>
-  <li>スリーカード</li>
-</ul>
-</body></html>
-HTML;
-print $str;
+$str = "こんにちは{name}、今日も{name}の笑顔が見れて嬉しいです。";
+$name = "田中さん";
+print str_replace('{name}', $name, $str);
 ?>

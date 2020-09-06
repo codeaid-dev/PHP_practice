@@ -1,4 +1,5 @@
 <?php
-$name = "山田花子";
-echo "こんには" , $name, "です。";
+$radius = 16;
+$pi = 3.14;
+printf('半径%dcmの円の面積は、%.2f平方cmです。', $radius, $radius ** 2 * $pi);
 ?>

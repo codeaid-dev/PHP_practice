@@ -1,6 +1,9 @@
 <?php
-$str = "select * from menu order by price limit 1<br>";
-print strtoupper($str);
-$str = "COFEE TEA CAKE COOKIES CREPE";
-print strtolower($str);
+print "お名前は？";
+$name = trim(fgets(STDIN));
+$msg = <<< EOM
+{$name}様
+ご注文を承りました。\n
+EOM;
+echo $msg;
 ?>
