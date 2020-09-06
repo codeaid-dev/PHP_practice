@@ -11,6 +11,6 @@
     $list[$i] = $list[$min];
     $list[$min] = $w;
     $str = implode(',', $list);
-    //print($str . "\n"); // for console
-    print($str . "<br>");
+    print($str . "\n"); // for console
+    //print($str . "<br>");
   }

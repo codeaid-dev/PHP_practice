@@ -7,6 +7,6 @@
       }
       $list[$s] = $w;
       $str = implode(',', $list);
-      //print($str . "\n"); // for console
-      print($str . "<br>");
+      print($str . "\n"); // for console
+      //print($str . "<br>");
   }

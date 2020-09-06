@@ -1,8 +1,18 @@
 <?php
-$list = array(54, 58, 60, 62, 65, 73, 75);
-for ($i = 0; $i < 7; $i++) {
-  if ($list[$i] == 65) {
-    print("65は" . ++$i . "番目\n");
-    break;
+function sequential_search($list, $search) {
+  $flag = false;
+  for ($i = 0; $i < count($list); $i++) {
+    if ($list[$i] == $search) {
+      print "{$search}は" . ++$i . "番目\n";
+      $flag = true;
+      break;
+    }
+  }
+  if (!$flag) {
+    print "ありません\n";
   }
 }
+
+print "探索数値入力：";
+$s = trim(fgets(STDIN));
+sequential_search(array(54, 58, 60, 62, 65, 73, 75), $s);
