@@ -3,7 +3,7 @@ $alp = array("A","B","C","D","E","F","G",
             "H","I","J","K","L","M","N",
             "O","P","Q","R","S","T","U",
             "V","W","X","Y","Z");
-$hide = rand(0,9);
+$hide = rand(0,25);
 //$hide = array_rand($alp, 1);
 $str = "";
 foreach($alp as $key => $value) {
