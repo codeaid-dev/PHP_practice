@@ -17,6 +17,6 @@ $ans = trim(fgets(STDIN));
 if ($ans == $alp[$hide]) {
   print "正解！\n";
 } else {
-  print "不正解\n";
+  print "不正解\n正解は「".$alp[$hide]."」\n";
 }
 
