@@ -72,3 +72,6 @@ SELECT * FROM 書籍 WHERE SUBSTRING(書籍名,1,10) LIKE '%入門%'
 SELECT 書籍名,価格,価格*1.1 AS 税込価格 FROM 書籍 ORDER BY 価格 DESC
 /*** 36. ***/
 SELECT DISTINCT 分類, CASE 分類 WHEN '1' THEN '理工' WHEN '2' THEN 'プログラム' WHEN '3' THEN '資格' END AS 分類名 FROM 書籍
+/*** 37. ***/
+SELECT 書籍名, SUBSTRING(ISBN,1,3) || '-' || SUBSTRING(ISBN,4,1) || '-' || SUBSTRING(ISBN,5,3) || '-' || SUBSTRING(ISBN,6,5) || '-' || SUBSTRING(13,1) AS ISBN
+
