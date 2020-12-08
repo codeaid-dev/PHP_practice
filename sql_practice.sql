@@ -74,4 +74,25 @@ SELECT 書籍名,価格,価格*1.1 AS 税込価格 FROM 書籍 ORDER BY 価格 D
 SELECT DISTINCT 分類, CASE 分類 WHEN '1' THEN '理工' WHEN '2' THEN 'プログラム' WHEN '3' THEN '資格' END AS 分類名 FROM 書籍
 /*** 37. ***/
 SELECT 書籍名, SUBSTRING(ISBN,1,3) || '-' || SUBSTRING(ISBN,4,1) || '-' || SUBSTRING(ISBN,5,3) || '-' || SUBSTRING(ISBN,6,5) || '-' || SUBSTRING(13,1) AS ISBN
-
+/*** 38. ***/
+UPDATE 書籍 SET 発売日=CURRENT_DATE WHERE ISBN='9784295005094'
+/*** 39. ***/
+SELECT ISBN,書籍名,価格,TRUNC(価格*0.8, 0) AS 値下げした価格 FROM 書籍 WHERE 価格>=5000
+/*** 40. ***/
+SELECT * FROM 書籍 WHERE 書籍名 LIKE '%PHP%' ORDER BY 価格 DESC OFFSET 0 FETCH FIRST 3 ROWS ONLY
+/*** 41. ***/
+CREATE TABLE 文房具 (
+  商品ID CHAR(7) PRIMARY KEY,
+  文具名 VARCHAR(256) UNIQUE NOT NULL,
+  価格 INTEGER DEFAULT 0 CHECK(価格>=0),
+  分類 INTEGER DEFAULT 4 NOT NULL,
+  購入日 DATE NOT NULL
+);
+/*** 42. ***/
+DROP TABLE 文房具
+/*** 43. ***/
+ALTER TABLE 文房具 ADD メモ VARCHAR(256) DEFAULT '不明' NOT NULL
+/*** 44. ***/
+ALTER TABLE 文房具 DROP メモ
+/*** 45. ***/
+INSERT INTO 文房具 (商品ID,文具名,価格,分類,購入日) VALUES ('0000100','鉛筆',100,1,CURRENT_DATE)
