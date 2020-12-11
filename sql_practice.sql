@@ -73,7 +73,7 @@ SELECT 書籍名,価格,価格*1.1 AS 税込価格 FROM 書籍 ORDER BY 価格 D
 /*** 36. ***/
 SELECT DISTINCT 分類, CASE 分類 WHEN '1' THEN '理工' WHEN '2' THEN 'プログラム' WHEN '3' THEN '資格' END AS 分類名 FROM 書籍
 /*** 37. ***/
-SELECT SUBSTRING(ISBN,1,3) || '-' || SUBSTRING(ISBN,4,1) || '-' || SUBSTRING(ISBN,5,3) || '-' || SUBSTRING(ISBN,6,5) || '-' || SUBSTRING(ISBN,13,1) AS ISBN, 書籍名 FROM 書籍
+SELECT SUBSTRING(ISBN,1,3) || '-' || SUBSTRING(ISBN,4,1) || '-' || SUBSTRING(ISBN,5,3) || '-' || SUBSTRING(ISBN,8,5) || '-' || SUBSTRING(ISBN,13,1) AS ISBN, 書籍名 FROM 書籍
 /*** 38. ***/
 UPDATE 書籍 SET 発売日=CURRENT_DATE WHERE ISBN='9784295005094'
 /*** 39. ***/
