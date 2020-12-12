@@ -37,7 +37,7 @@ SELECT * FROM 書籍 WHERE 発売日>='2019-04-01' AND 発売日<='2020-03-31'
 /*** 18. ***/
 SELECT * FROM 書籍 WHERE 発売日>='2020-01-01' AND 価格<=2000
 /*** 19. ***/
-SELECT * FROM 書籍 WHERE (分類=2 AND 価格<=2000) OR (分類=1 AND 価格<=1000)
+SELECT * FROM 書籍 WHERE (分類=2 AND 価格<=2000) OR (分類=3 AND 価格<=1000)
 /*** 20. ***/
 SELECT * FROM 書籍 WHERE ISBN LIKE '9784_________' OR 書籍名 LIKE 'は___%L'
 /*** 21. ***/
