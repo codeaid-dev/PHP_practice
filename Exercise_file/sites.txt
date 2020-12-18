@@ -1,0 +1,10 @@
+google.com|Googl
+yahoo.co.jp|Yahoo! Japan
+php.net|PHP公式サイト
+
+
+developer.mozilla.org|MDN web docs
+oca.ac.jp|OCA大阪デザイン&ITテクノロジー専門学校
+
+
+
