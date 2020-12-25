@@ -2,13 +2,15 @@
   $msg = null;
   if (isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
     $old_name = $_FILES['image']['tmp_name'];
-    $tmp_name = explode('.',$_FILES['image']['name']);
-    $tmp_name = end($tmp_name);
-    $new_name = date("YmdHis");
-    $new_name .= rand();
-    $new_name .= $tmp_name;
-    if (exif_imagetype($_FILES['image']['tmp_name'])) {
-      print '画像ファイルではありません';
+    $new_name = $_FILES['image']['name'];
+//    $new_name = pathinfo($new_name);
+//    $extension = $new_name['extension'];
+//    $new_name = $new_name['filename'];
+    $extension = substr($new_name, strrpos($new_name, '.')+1);
+    $new_name = substr($new_name, 0, strrpos($new_name, '.'));
+    $new_name .= '_'.date("YmdHis");
+    $new_name .= '.'.$extension;
+    if (!exif_imagetype($_FILES['image']['tmp_name'])) {
       header('Location: form4.php');
       exit;
     }
@@ -16,6 +18,7 @@
       $msg = 'アップロードしました。';
     } else {
       $msg = 'アップロードできませんでした。';
+      var_dump($msg);
     }
   }
 ?>
