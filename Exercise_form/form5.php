@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <title>PHP実習</title>
 </head>
 <body>
-  <form method="POST" action="form6.php">
+  <form method="POST" action="form5.php">
   <label>エンティティ変換する：<input type="text" name="text_1"></label><br>
   <label>エンティティ変換しない：<input type="text" name="text_2"></label>
   <br>
