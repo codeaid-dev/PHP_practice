@@ -102,26 +102,27 @@ function validate_form() {
 }
 
 function process_form($input) {
-  $langs = '';
+  $langs = array();
   if (isset($input['php']) && ($input['php'] == 'yes')) {
-    $langs .= $GLOBALS['langs']['php'].' ';
+    $langs[] = $GLOBALS['langs']['php'];
   }
   if (isset($input['js']) && ($input['js'] == 'yes')) {
-    $langs .= $GLOBALS['langs']['js'].' ';
+    $langs[] = $GLOBALS['langs']['js'];
   }
   if (isset($input['html']) && ($input['html'] == 'yes')) {
-    $langs .= $GLOBALS['langs']['html'].' ';
+    $langs[] = $GLOBALS['langs']['html'];
   }
   if (isset($input['sql']) && ($input['sql'] == 'yes')) {
-    $langs .= $GLOBALS['langs']['sql'].' ';
+    $langs[] = $GLOBALS['langs']['sql'];
   }
+  $lang_str = implode(", ", $langs);
   // 表示テキストを作成する
   $idsplay=<<<_SURVEY_
         ご回答ありがとうございます。
         名前： {$input['name']}
         メールアドレス：{$input['email']}
         年齢：{$input['age']}
-        興味のあるプログラミング言語：$langs
+        興味のあるプログラミング言語：$lang_str
         学習に使われるパソコン：{$input['pc']}
         パソコンメーカー：{$input['pc_maker']}
         _SURVEY_;
