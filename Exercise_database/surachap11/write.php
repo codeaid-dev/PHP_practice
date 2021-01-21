@@ -13,7 +13,8 @@ if (!preg_match("/^[0-9]{4}$/", $pass)) {
   exit();
 }
 
-$dsn = 'mysql:host=mysql;dbname=tennis;charset=utf8';
+//$dsn = 'mysql:host=localhost;dbname=tennis;charset=utf8'; // XAMPP/MAMP/VMの場合
+$dsn = 'mysql:host=mysql;dbname=tennis;charset=utf8'; // Dockerの場合
 $user = 'tennisuser';
 $password = 'password';
 
