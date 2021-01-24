@@ -2,6 +2,7 @@
 /* bookstoreデータベース作成 */
 CREATE DATABASE bookstore;
 
+USE bookstore;
 /* booksテーブル作成 */
 CREATE TABLE books (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -9,12 +10,12 @@ CREATE TABLE books (
   name VARCHAR(255) NOT NULL,
   price INT NOT NULL,
   page INT NOT NULL,
-  release DATE
+  date DATE NOT NULL
 ) DEFAULT CHARACTER SET=utf8;
 
 /* bookstoreデータベースのユーザ作成（bookadmin） */
-GRANT ALL ON bookstore.* to 'bookadmin'@'mysql' IDENTIFIED BY 'password';
 /* GRANT ALL ON bookstore.* to 'bookadmin'@'localhost' IDENTIFIED BY 'password'; */
+GRANT ALL ON bookstore.* to 'bookadmin'@'%' IDENTIFIED BY 'password';
 FLUSH PRIVILEGES;
 
 /* 以下はユーザ（bookadmin）の確認 */
