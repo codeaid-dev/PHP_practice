@@ -22,8 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   try {
     $db = new PDO($dsn, $user, $password);
     $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $stmt = $db->prepare("
-      INSERT INTO books (isbn, name, price, page, date) VALUES (:isbn, :name, :price, :page, :date)");
+    $stmt = $db->prepare("INSERT INTO books (isbn, name, price, page, date) VALUES (:isbn, :name, :price, :page, :date)");
     $stmt->bindParam(':isbn', $isbn, PDO::PARAM_STR);
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':price', $price, PDO::PARAM_INT);

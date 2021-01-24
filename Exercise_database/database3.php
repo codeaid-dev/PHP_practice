@@ -14,8 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   try {
     $db = new PDO($dsn, $user, $password);
     $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $stmt = $db->prepare("
-    SELECT * FROM books WHERE isbn=:isbn OR name LIKE :name");
+    $stmt = $db->prepare("SELECT * FROM books WHERE isbn=:isbn OR name LIKE :name");
     $stmt->bindParam(':isbn', $keyword, PDO::PARAM_STR);
     $name = "%".$keyword."%";
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
