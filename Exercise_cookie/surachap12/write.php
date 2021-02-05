@@ -13,6 +13,8 @@ if (!preg_match("/^[0-9]{4}$/", $pass)) {
   exit();
 }
 
+setcookie('name', $name, time()+60*60*24*30);
+
 //$dsn = 'mysql:host=localhost;dbname=tennis;charset=utf8'; // XAMPP/MAMP/VMの場合
 $dsn = 'mysql:host=mysql;dbname=tennis;charset=utf8'; // Dockerの場合
 $user = 'tennisuser';
