@@ -1,7 +1,10 @@
 <?php
+include 'includes/login.php';
+
 $num = 10;
 
-$dsn = 'mysql:host=mysql;dbname=tennis;charset=utf8';
+//$dsn = 'mysql:host=localhost;dbname=tennis;charset=utf8';
+$dsn = 'mysql:host=mysql;dbname=tennis;charset=utf8'; // Dockerの場合はhostにコンテナ名を設定
 $user = 'tennisuser';
 $password = 'password';
 

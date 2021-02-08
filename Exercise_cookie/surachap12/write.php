@@ -1,4 +1,6 @@
 <?php
+include 'includes/login.php';
+
 $name = $_POST['name'];
 $title = $_POST['title'];
 $body = $_POST['body'];
