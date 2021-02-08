@@ -46,17 +46,20 @@ function validate_form() {
 
   $password_ok = false;
 
-  $input['username'] = $_POST['username'] ?? '';
-  $submitted_password = $_POST['password'] ?? '';
-
-  $stmt = $db->prepare("SELECT password FROM users WHERE username = ?");
-  $stmt->execute($input['username']);
-  $row = $stmt->fetch();
-  if ($row) {
-    $password_ok = password_verify($submitted_password, $row[0]);
-  }
-  if (!$password_ok) {
-    $error[] = 'Please enter a valid username and password.';
+  $input['username'] = trim($_POST['username'] ?? '');
+  $submitted_password = trim($_POST['password'] ?? '');
+  if (!strlen($input['username']) || !strlen($submitted_password)) {
+    $errors[] = '正しいユーザー名とパスワードを設定してください。';
+  } else {
+    $stmt = $db->prepare("SELECT password FROM users WHERE username = ?");
+    $stmt->execute($input['username']);
+    $row = $stmt->fetch();
+    if ($row) {
+      $password_ok = password_verify($submitted_password, $row[0]);
+    }
+    if (!$password_ok) {
+      $error[] = '正しいユーザー名とパスワードを設定してください。';
+    }
   }
 
   return array($errors, $input);

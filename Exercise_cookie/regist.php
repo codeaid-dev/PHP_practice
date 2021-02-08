@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <form method="POST" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">
     ユーザー名：<input type="text", name="username"><br>
     パスワード：<input type="password", name="password"><br>
-    <button type="submit">ログイン</button>
+    <button type="submit">登録</button>
   </form>
 </body>
 </html>
