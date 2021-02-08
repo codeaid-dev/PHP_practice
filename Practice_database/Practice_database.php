@@ -22,6 +22,7 @@ C
 // ********** Q11 **********
 F
 // ********** Q12 **********
+①$_POST['id'] ②$_POST['name'] ③':id' ④"%".$name."%" ⑤':name'
 <?php
 $id = htmlspecialchars($_POST['id']); // name属性が”id”の値がPOST送信されたデータ
 $name = htmlspecialchars($_POST['name']); // name属性が”name”の値がPOST送信されたデータ
