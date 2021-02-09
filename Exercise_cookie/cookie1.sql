@@ -8,13 +8,16 @@ USE exercise;
 GRANT ALL ON exercise.* to 'foobar'@'%' IDENTIFIED BY 'password';
 FLUSH PRIVILEGES;
 
+/* foobarユーザでログイン */
+mysql -u foobar -p
+
+USE exercise;
+
 /* usersテーブル作成 */
 CREATE TABLE users (
   username VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL
 ) DEFAULT CHARACTER SET=utf8;
 
-/* 以下はユーザ（foobar）の確認 */
-mysql -u foobar -p
-USE exercise;
+/* テーブル確認 */
 DESC users;

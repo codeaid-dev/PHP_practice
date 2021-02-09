@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (isset($_SESSION['username'])) {
+  header('Location: index.php');
+  exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   try {
@@ -30,12 +34,15 @@ function show_form($errors = array()) {
   }
 
   print <<<_FORM_
+      <h1>PHP実習</h1>
+      <h2>ログイン画面</h2>
       <form method="POST" action="$_SERVER[PHP_SELF]">
       $errorHtml
       ユーザー名：<input type="text", name="username"><br>
       パスワード：<input type="password", name="password"><br>
       <button type="submit">ログイン</button>
       </form>
+      <p><a href="index.php">トップページへ戻る</a></p>
       _FORM_;
 }
 
@@ -52,7 +59,7 @@ function validate_form() {
     $errors[] = '正しいユーザー名とパスワードを設定してください。';
   } else {
     $stmt = $db->prepare("SELECT password FROM users WHERE username = ?");
-    $stmt->execute($input['username']);
+    $stmt->execute(array($input['username']));
     $row = $stmt->fetch();
     if ($row) {
       $password_ok = password_verify($submitted_password, $row[0]);
@@ -67,5 +74,6 @@ function validate_form() {
 
 function process_form($input) {
   $_SESSION['username'] = $input['username'];
-  print "Welcome, $_SESSION[username]";
+  print "ようこそ　$_SESSION[username]様";
+  print '<p><a href="index.php">トップページへ戻る</a></p>';
 }

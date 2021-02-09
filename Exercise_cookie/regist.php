@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (isset($_SESSION['username'])) {
+  header('Location: index.php');
+  exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   try {
     //$db = new PDO('mysql:host=localhost;dbname=exercise;charset=utf8', 'foobar', 'password'); // XAMPP/MAMP/VM
@@ -26,11 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <title>PHP実習</title>
 </head>
 <body>
+  <h1>PHP実習</h1>
+  <h2>ユーザー登録画面</h2>
   <form method="POST" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">
     ユーザー名：<input type="text", name="username"><br>
     パスワード：<input type="password", name="password"><br>
     <button type="submit">登録</button>
   </form>
+  <p><a href="index.php">トップページへ戻る</a></p>
 </body>
 </html>
 
@@ -65,7 +74,8 @@ function process_form($input) {
     $stmt = $db->prepare("INSERT INTO users (username, password) VALUES (?,?)");
     $stmt->execute(array($input['username'], password_hash($input['password'], PASSWORD_DEFAULT)));
 
-    print htmlspecialchars($input['username']) . "のユーザー登録ができました。";
+    print htmlspecialchars($input['username']) . "様のユーザー登録ができました。";
+    print '<p><a href="index.php">トップページへ戻る</a></p>';
   } catch (PDOException $e) {
     print "ユーザー登録できませんでした。>" . $e->getMessage();
   }
