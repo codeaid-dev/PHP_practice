@@ -36,6 +36,9 @@ function show_form($errors = '') {
 }
 
 function validate_form() {
+  $input = array();
+  $errors = array();
+
   $input['name'] = trim($_POST['name'] ?? '');
   if (strlen($input['name']) == 0) {
     $errors[] = '名前を入力してください。';
