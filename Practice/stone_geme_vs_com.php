@@ -12,6 +12,7 @@ while (true) {
 
   if ($turn == 1) {
     print "わたしの番です\n";
+    $p1 = 0;
     if ($max <= 4) {
       $p1 = $max - 1;
     } else {
