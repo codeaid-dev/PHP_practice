@@ -119,6 +119,18 @@ if (getTrue() || getFalse()) {
 // 評価はtrue
 
 // ********** Q13 **********
+$a = 0;
+function checkScope2($a) {
+  $GLOBALS['a'] += 100;
+  return $a;
+}
+
+print($a . " ");
+print(checkScope2($a) . " ");
+print($a . "\n");
+// 0 0 100
+
+// ********** Q14 **********
 function getMax($nums) {
   $max = 0;
   for ($i = 0; $i < count($nums); $i++) {
@@ -134,18 +146,6 @@ print "入力：";
 $input = trim(fgets(STDIN));
 $ans = getMax(explode(",", $input));
 print($ans . "\n");
-
-// ********** Q14 **********
-$a = 0;
-function checkScope2($a) {
-  $GLOBALS['a'] += 100;
-  return $a;
-}
-
-print($a . " ");
-print(checkScope2($a) . " ");
-print($a . "\n");
-// 0 0 100
 
 // ********** Q15 **********
 function pyramid($word, $num) {
