@@ -8,11 +8,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   //$dsn = 'mysql:host=localhost;dbname=bookstore;charset=utf8'; // XAMPP/MAMP/VMの場合
   $dsn = 'mysql:host=mysql;dbname=bookstore;charset=utf8'; // Dockerの場合
+  $dsn = 'sqlite:./bookstore.db'; // SQLiteの場合
   $user = 'bookadmin';
   $password = 'password';
 
   try {
-    $db = new PDO($dsn, $user, $password);
+    //$db = new PDO($dsn, $user, $password);
+    $db = new PDO($dsn); //SQLiteの場合
     $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $stmt = $db->prepare("SELECT * FROM books WHERE isbn=:isbn OR name LIKE :name");
     $stmt->bindParam(':isbn', $keyword, PDO::PARAM_STR);

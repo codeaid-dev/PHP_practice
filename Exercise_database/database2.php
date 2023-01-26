@@ -15,12 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 
   //$dsn = 'mysql:host=localhost;dbname=bookstore;charset=utf8'; // XAMPP/MAMP/VMの場合
-  $dsn = 'mysql:host=mysql;dbname=bookstore;charset=utf8'; // Dockerの場合
+  //$dsn = 'mysql:host=mysql;dbname=bookstore;charset=utf8'; // Dockerの場合
+  $dsn = 'sqlite:./bookstore.db'; // SQLiteの場合
   $user = 'bookadmin';
   $password = 'password';
 
   try {
-    $db = new PDO($dsn, $user, $password);
+    //$db = new PDO($dsn, $user, $password);
+    $db = new PDO($dsn); //SQLiteの場合
     $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $stmt = $db->prepare("INSERT INTO books (isbn, name, price, page, date) VALUES (:isbn, :name, :price, :page, :date)");
     $stmt->bindParam(':isbn', $isbn, PDO::PARAM_STR);
@@ -37,21 +39,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 function validate_form() {
+  $input['isbn'] = filter_input(INPUT_POST, 'isbn', FILTER_VALIDATE_INT);
   $input['price'] = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_INT);
   $input['page'] = filter_input(INPUT_POST, 'page', FILTER_VALIDATE_INT);
-  if ($_POST['isbn'] == '') {
-    $errors[] = 'ISBNを入力してください。';
+  $errors = array();
+  if (empty($input['isbn'])) {
+    $errors[] = 'ISBNは数字で入力してください。';
   }
-  if ($_POST['name'] == '') {
+  if (empty($_POST['name'])) {
     $errors[] = '書籍名を入力してください。';
   }
-  if (!$input['price']) {
-    $errors[] = '価格は数値を入力してください。';
+  if (empty($input['price'])) {
+    $errors[] = '価格は数字を入力してください。';
   }
-  if (!$input['page']) {
-    $errors[] = 'ページ数は数値を入力してください。';
+  if (empty($input['page'])) {
+    $errors[] = 'ページ数は数字を入力してください。';
   }
-  if ($_POST['date'] == '') {
+  if (empty($_POST['date'])) {
     $errors[] = '発売日を入力してください。';
   }
 

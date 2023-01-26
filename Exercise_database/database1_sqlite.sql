@@ -1,0 +1,9 @@
+/* booksテーブル作成 */
+CREATE TABLE books (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  isbn VARCHAR(17) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  price INTEGER NOT NULL,
+  page INTEGER NOT NULL,
+  date TEXT NOT NULL
+);
