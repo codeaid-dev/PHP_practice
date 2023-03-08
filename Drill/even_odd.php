@@ -1,22 +1,14 @@
 <?php
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $result = '';
     $info = filter_input(INPUT_POST, 'info', FILTER_VALIDATE_INT);
-    if (!is_null($info) && $info !== false && $info>0) {
-      for ($i=1;$i<=$info;$i++) {
-        if ($i%15==0) {
-          $result .= 'FizzBuzz';
-        } else if ($i%3==0) {
-          $result .= 'Fizz';
-        } else if ($i%5==0) {
-          $result .= 'Buzz';
-        } else {
-          $result .= $i;
-        }
-        $result .= ' ';
+    $result = array();
+    if ($info!=null && $info!=false && $info>0) {
+      for ($i=0;$i<$info;$i++) {
+        $result[] = $i*2+$info;
       }
+      $result = implode(', ',$result);
     } else {
-      $result = '入力値は正の整数ではありません。';
+      $result = '正の整数を入力してください。';
     }
   }
 ?>
