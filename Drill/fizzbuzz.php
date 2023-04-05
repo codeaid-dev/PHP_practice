@@ -16,7 +16,7 @@
         $result .= ' ';
       }
     } else {
-      $result = '入力値は正の整数ではありません。';
+      $result = '整数を入力してください。';
     }
   }
 ?>
@@ -35,6 +35,6 @@
   </form>
   <h2>結果表示</h2>
   <?php $result = $result ?? ''; ?>
-  <p><?php echo htmlspecialchars($result); ?></p>
+  <p><?php echo $result; ?></p>
 </body>
 </html>

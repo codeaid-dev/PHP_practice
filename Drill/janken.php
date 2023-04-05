@@ -33,6 +33,6 @@
   </form>
   <h2>結果表示</h2>
   <?php $result = $result ?? ''; ?>
-  <p><?php echo htmlspecialchars($result); ?></p>
+  <p><?php echo $result; ?></p>
 </body>
 </html>
