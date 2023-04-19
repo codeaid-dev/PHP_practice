@@ -22,7 +22,7 @@
   <title>PHPドリル</title>
 </head>
 <body>
-  <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+  <form method="POST">
     <h2>じゃんけん</h2>
     <p>あなたの手</p>
     <label>グー<input type="radio" name="hand" value=1 checked></label>

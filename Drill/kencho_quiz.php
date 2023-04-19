@@ -1,5 +1,5 @@
 <?php
-$fp = fopen('kencho.csv', 'r');
+$fp = fopen('kencho.csv', 'rb');
 $kencho = array();
 while ((!feof($fp)) && ($info = fgetcsv($fp))) {
   $kencho[] = $info;
@@ -29,8 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <title>PHPドリル</title>
 </head>
 <body>
+  <h1>県庁所在地クイズ</h1>
   <p>問題：<?= $q ?>の県庁所在地は？</p>
-  <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+  <form method="POST">
     <input type="hidden" name="question" value="<?= $q ?>">
     <label>答え：<input type="text" name="answer" value="<?= $answer ?>"></label><br>
     <br>
