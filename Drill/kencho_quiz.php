@@ -1,5 +1,5 @@
 <?php
-$fp = fopen('kencho.csv', 'rb');
+$fp = fopen('kencho.csv', 'r');
 $kencho = array();
 while ((!feof($fp)) && ($info = fgetcsv($fp))) {
   $kencho[] = $info;
