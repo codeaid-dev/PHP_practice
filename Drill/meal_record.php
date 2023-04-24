@@ -22,11 +22,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PHPドリル</title>
-  <style>
-    table,th,td {
-      border: 1px solid;
-    }
-  </style>
 </head>
 <body>
   <h1>食事の記録</h1>
@@ -38,7 +33,7 @@
     <p><button type="submit">記録</button></p>
   </form>
   <h2>一覧</h2>
-  <table>
+  <table border="1">
     <tr>
       <th>日付</th>
       <th>朝食</th>
