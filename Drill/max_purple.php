@@ -6,10 +6,16 @@
     if ($red!=null && $red!=false && $red>0 &&
         $blue!=null && $blue!=false && $blue>0 &&
         $white!=null && $white!=false && $white>0) {
-      $t1 = abs($red-$blue);
+      /*$t1 = abs($red-$blue);
       $t2 = intval(($white-$t1)/2);
-      $t3 = max($red,$blue);
-      $result = '紫色のボールは'.$t2+$t3.'個';
+      if ($t2 < 0) {
+        $t2 = $white;
+        $t3 = min($red,$blue);
+      } else {
+        $t3 = max($red,$blue);
+      }
+      $result = '紫色のボールは'.$t2+$t3.'個';*/
+      $result = '紫色のボールは'.min(intval(($red+$blue+$white)/2),($red+$white),($blue+$white)).'個';
     } else {
       $result = '正の整数を入力してください。';
     }
