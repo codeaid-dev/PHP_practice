@@ -10,10 +10,6 @@
     $db = new PDO($dsn, $user, $password);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $db->exec("CREATE TABLE IF NOT EXISTS products(
-              id INTEGER PRIMARY KEY AUTO_INCREMENT,
-              product VARCHAR(256) NOT NULL,
-              price INTEGER NOT NULL)");
 
     if (isset($_POST['submit'])) {
       $product = $_POST['product'];
@@ -22,10 +18,10 @@
       $stmt->bindParam(':product', $product, PDO::PARAM_STR);
       $stmt->bindParam(':price', $price, PDO::PARAM_INT);
       $stmt->execute();
-      $info = '登録しました。';
+      $info = $product . 'を' .  . '個注文しました。';
     }
 
-    $q = $db->query("SELECT * FROM products");
+    $q = $db->query("SELECT * FROM oder");
     while ($row = $q->fetch()) {
       $work=array();
       $work['id'] = $row['id'];
@@ -47,7 +43,7 @@
   <title>PHPドリル</title>
 </head>
 <body>
-  <h1>データベース①</h1>
+  <h1>データベース②</h1>
   <?php if (isset($info)) {
     print '<p>' . $info . '</p>';
   } ?>
@@ -65,18 +61,25 @@
           <th>番号</th>
           <th>製品</th>
           <th>価格(円)</th>
+          <th>処理</th>
         </tr>
       </thead>
       <tbody>
+        <form method="POST">
         <?php foreach ($products as $p) {
           print '<tr><td>' . $p['id'] . '</td>';
           print '<td>' . $p['product'] . '</td>';
-          print '<td>' . $p['price'] . '</td></tr>';
+          print '<td>' . $p['price'] . '</td>';
+          print '<td>';
+          print '<input type="checkbox" name="id" value="' . $p['id'] . '">';
+          print '<label><input type="number" min="1" max="5" name="' . $p['product'].$p['id'] . '" value="1" style="margin-left:5px;">個</label>';
+          print '</td></tr>';
         } ?>
+        <button type="submit" name="oder">注文</button>
       </tbody>
     </table>
   <?php } else { ?>
-    <p>製品がありません。</p>
+    <p>何も注文がありません。</p>
   <?php } ?>
 </body>
 </html>
