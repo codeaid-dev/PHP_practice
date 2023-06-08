@@ -48,7 +48,7 @@ if (isset($_POST['del_from_cart'])) {
     <p><button type="submit" name="add_to_cart">カートに追加</button></p>
   </form>
 
-  <h2>カートの中身</h2>
+  <h2>カート</h2>
   <?php if (isset($_SESSION['cart'])) {
     $total_price = 0;
       foreach ($_SESSION['cart'] as $product) {
@@ -58,7 +58,7 @@ if (isset($_POST['del_from_cart'])) {
     合計: <?= $total_price*1.1 ?>円(税込)<br>
     <form method="POST"><button type="submit" name="del_from_cart">カートを空にする</button></form>
   <?php } else { ?>
-    カートに商品はありません。
+    <p>カートに商品はありません。</p>
   <?php } ?>
 </body>
 </html>

@@ -15,7 +15,7 @@
               product VARCHAR(256) NOT NULL,
               price INTEGER NOT NULL)");
     $db->exec("CREATE TABLE IF NOT EXISTS oder(
-              username VARCHAR(256) NOT NULL,
+              customer VARCHAR(256) NOT NULL,
               pid INTEGER REFERENCES productdb(id),
               quantity INTEGER NOT NULL)");
 
@@ -59,6 +59,7 @@
 </head>
 <body>
   <h1>データベース②</h1>
+  <h2>製品登録</h2>
   <?php if (isset($info)) {
     print '<p>' . $info . '</p>';
   } ?>
@@ -67,7 +68,7 @@
     <label>価格(円)：<input type="number" name="price" required></label></p>
     <button type="submit" name="submit">登録</button>
   </form>
-  <a href="oder.php">注文</a>
+  <p><a href="oder.php">注文画面</a></p>
   <hr>
   <p>製品一覧</p>
   <?php if (!empty($products)) { ?>
@@ -94,7 +95,7 @@
       </tbody>
     </table>
   <?php } else { ?>
-    <p>製品がありません。</p>
+    <p>製品の登録がありません。</p>
   <?php } ?>
 </body>
 </html>

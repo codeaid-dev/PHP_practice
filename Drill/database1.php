@@ -57,7 +57,7 @@
     <button type="submit" name="submit">登録</button>
   </form>
   <hr>
-  <p>製品一覧</p>
+  <h2>製品一覧</h2>
   <?php if (!empty($products)) { ?>
     <table border="1">
       <thead>
@@ -76,7 +76,7 @@
       </tbody>
     </table>
   <?php } else { ?>
-    <p>製品がありません。</p>
+    <p>製品の登録がありません。</p>
   <?php } ?>
 </body>
 </html>
