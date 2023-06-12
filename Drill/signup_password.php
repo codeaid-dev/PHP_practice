@@ -8,8 +8,10 @@ if (file_exists($filename)) {
 $errors = array();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $username = $_POST['username'] ?? '';
-  if (in_array($username, array_keys($users))) {
-    $errors[] = '登録済みのユーザーです';
+  if (isset($json) && isset($users)) {
+    if (in_array($username, array_keys($users))) {
+      $errors[] = '登録済みのユーザーです';
+    }
   }
   $email = $_POST['email'] ?? '';
   if (preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email) !== 1) {
