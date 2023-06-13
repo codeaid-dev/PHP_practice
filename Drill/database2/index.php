@@ -16,7 +16,7 @@
               price INTEGER NOT NULL)");
     $db->exec("CREATE TABLE IF NOT EXISTS oder(
               customer VARCHAR(256) NOT NULL,
-              pid INTEGER REFERENCES productdb(id),
+              pid INTEGER REFERENCES products(id),
               quantity INTEGER NOT NULL)");
 
     if (isset($_POST['submit'])) {
