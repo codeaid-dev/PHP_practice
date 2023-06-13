@@ -1,17 +1,9 @@
 <?php
+  require_once 'config.php';
   session_start();
-  $dsn = 'mysql:host=mysql;dbname=productdb';
-  $user = 'root';
-  $password = 'password';
-
   $products = array();
 
   try {
-    //$db = new PDO("sqlite:./db/product.db");
-    $db = new PDO($dsn, $user, $password);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-
     if (isset($_POST['oder']) && isset($_SESSION['cart']) && isset($_SESSION['customer'])) {
       $customer = $_SESSION['customer'];
       foreach ($_SESSION['cart'] as $id => $value) {

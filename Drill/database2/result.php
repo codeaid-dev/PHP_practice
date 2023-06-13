@@ -1,16 +1,8 @@
 <?php
-  $dsn = 'mysql:host=mysql;dbname=productdb';
-  $user = 'root';
-  $password = 'password';
-
+  require_once 'config.php';
   $products = array();
 
   try {
-    //$db = new PDO("sqlite:./db/product.db");
-    $db = new PDO($dsn, $user, $password);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-
     if (isset($_GET['customer'])) {
       $customer = $_GET['customer'];
       $stmt = $db->prepare("SELECT * FROM oder WHERE customer=:customer");
