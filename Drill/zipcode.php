@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $city = $_POST['city'] ?? '';
     $place = $_POST['place'] ?? '';
     foreach ($zipdata as $data) {
-      if ($data['city']==$city && $data['place']==$place) {
+      if ($data['city']==$city && ($data['place']==$place || $place=='')) {
         $zip1 = substr($data['zipcode'],0,3);
         $zip2 = substr($data['zipcode'],3);
         break;
