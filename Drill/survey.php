@@ -1,6 +1,6 @@
 <?php
 $pc_makers = array('Lenovo','DELL','HP','Apple','Dynabook','NEC','VAIO','ASUS','Acer','自作PC','その他');
-$langs = array('PHP','JavaScript','Python','Java');
+$langs = array('PHP','JavaScript','Python','Java','C/C++','C#','Ruby');
 $errors = array();
 $normal = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </td></tr>
     <tr><td>パソコンメーカー：</td>
     <td>
-      <select name="maker">
+      <select name="maker" required>
         <option value="">選択してください。</option>
         <?php foreach ($pc_makers as $value) { ?>
           <?php $selected = '';
