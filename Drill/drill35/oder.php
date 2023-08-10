@@ -38,7 +38,7 @@
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
     }
-    $ids = $_POST['id'];
+    $ids = $_POST['id'] ?? [];
     foreach ($ids as $id) {
       $quantity = $_POST['quantity'.$id];
       $product = $_POST['product'.$id];
