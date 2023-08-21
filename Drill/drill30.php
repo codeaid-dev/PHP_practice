@@ -89,8 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </td></tr><tr><td>学習に使われる<br>パソコン：</td>
     <td>
       <?php $checked = $_POST['pc'] ?? 'desktop' ?>
-      <label><input type="radio" name="pc" value="desktop" <?= $checked == 'desktop' ? 'checked' : '' ?>>デスクトップPC</label>
-      <label><input type="radio" name="pc" value="note" <?= $checked == 'note' ? 'checked' : '' ?>>ノートPC</label>
+      <label><input type="radio" name="pc" value="デスクトップPC" <?= $checked == 'デスクトップPC' ? 'checked' : '' ?>>デスクトップPC</label>
+      <label><input type="radio" name="pc" value="ノートPC" <?= $checked == 'ノートPC' ? 'checked' : '' ?>>ノートPC</label>
     </td></tr>
     <tr><td>パソコンメーカー：</td>
     <td>
