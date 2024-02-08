@@ -24,7 +24,7 @@
   <title>PHPドリル</title>
 </head>
 <body>
-  <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+  <form method="POST">
     <label>1円玉の枚数：<input type="text" name="yen1"></label><br>
     <label>5円玉の枚数：<input type="text" name="yen5"></label><br>
     <br>

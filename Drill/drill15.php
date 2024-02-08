@@ -44,7 +44,7 @@
   <?php if (isset($error)) : ?>
     <p><?= $error ?></p>
   <?php endif; ?>
-  <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+  <form method="POST">
     <label>底辺：<input type="text" name="bottom" value="<?= $bottom ?? '' ?>">cm</label><br>
     <label>高さ：<input type="text" name="height" value="<?= $height ?? '' ?>">cm</label><br>
     <label>上底：<input type="text" name="top" value="<?= $top ?? '' ?>">cm</label><br>

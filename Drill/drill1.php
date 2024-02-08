@@ -20,7 +20,7 @@
   <title>PHPドリル</title>
 </head>
 <body>
-  <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+  <form method="POST">
     <button type="submit">占う</button>
   </form>
   <h2>結果表示</h2>

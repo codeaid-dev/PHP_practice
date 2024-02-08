@@ -32,7 +32,7 @@
   <title>PHPドリル</title>
 </head>
 <body>
-  <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+  <form method="POST">
     <label>年月日：<input type="date" name="date"></label><br>
     <br>
     <button type="submit">表示</button>

@@ -27,7 +27,7 @@
   <title>PHPドリル</title>
 </head>
 <body>
-  <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+  <form method="POST">
     <label>横の数：<input type="text" name="yoko"></label><br>
     <label>縦の数：<input type="text" name="tate"></label><br>
     <br>

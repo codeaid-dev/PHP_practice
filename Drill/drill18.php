@@ -27,7 +27,7 @@ function gcd($a, $b) {
   <?php if (isset($error)) : ?>
     <p><?= $error ?></p>
   <?php endif; ?>
-  <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+  <form method="POST">
     <label>横：<input type="text" name="width" value="<?= $width ?? '' ?>" required></label><br>
     <label>縦：<input type="text" name="height" value="<?= $height ?? '' ?>" required></label><br>
     <br>

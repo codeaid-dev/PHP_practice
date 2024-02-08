@@ -24,7 +24,7 @@
   <title>PHPドリル</title>
 </head>
 <body>
-  <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+  <form method="POST">
     <label>赤色：<input type="text" name="red"></label><br>
     <label>青色：<input type="text" name="blue"></label><br>
     <label>白色：<input type="text" name="white"></label><br>

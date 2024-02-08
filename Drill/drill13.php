@@ -21,7 +21,7 @@
   <title>PHPドリル</title>
 </head>
 <body>
-  <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+  <form method="POST">
     <label>答え：<input type="text" name="num"></label><br>
     <br>
     <button type="submit">表示</button>

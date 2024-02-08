@@ -20,7 +20,7 @@
   <title>PHPドリル</title>
 </head>
 <body>
-  <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+  <form method="POST">
     <label>入力：<input type="text" name="info"></label><br>
     <br>
     <button type="submit">表示</button>

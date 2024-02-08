@@ -21,7 +21,7 @@
   <title>PHPドリル</title>
 </head>
 <body>
-  <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+  <form method="POST">
     <label>名前：<input type="text" name="name"></label><br>
     <br>
     <button type="submit">占う</button>

@@ -26,7 +26,7 @@
   <title>PHPドリル</title>
 </head>
 <body>
-  <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+  <form method="POST">
     <label>所持金：<input type="text" name="money"></label><br>
     <label>借りられる金額：<input type="text" name="borrow"></label><br>
     <label>本の価格：<input type="text" name="book"></label><br>
