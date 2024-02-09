@@ -12,7 +12,7 @@
   <title>PHPドリル</title>
 </head>
 <body>
-  <?php if ($_GET['page'] <= 5) { ?>
+  <?php if ($_GET['page'] > 0 && $_GET['page'] <= 5) { ?>
     <p style="font-size:40px;">ページ<?php echo $_GET['page'] ?>の画面</p>
     <?php for ($i=1; $i<=5; $i++) { ?>
       <?php if ($i != $_GET['page']) { ?>
