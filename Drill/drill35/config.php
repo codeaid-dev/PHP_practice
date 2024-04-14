@@ -1,22 +1,18 @@
 <?php
-  $dsn = 'mysql:host=mysql;dbname=productdb';
-  $user = 'root';
-  $password = 'password';
+//$dsn = "mysql:host=localhost;dbname=usersdb"; //XAMPP,MAMP,VM
+$dsn = "mysql:host=mysql;dbname=usersdb"; //Docker
+$dbuser = 'root';
+$dbpass = 'password';
 
-  try {
-    //$db = new PDO("sqlite:./db/product.db");
-    $db = new PDO($dsn, $user, $password);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $db->exec("CREATE TABLE IF NOT EXISTS products(
-              id INTEGER PRIMARY KEY AUTO_INCREMENT,
-              product VARCHAR(256) NOT NULL,
-              price INTEGER NOT NULL)");
-    $db->exec("CREATE TABLE IF NOT EXISTS oder(
-              customer VARCHAR(256) NOT NULL,
-              pid INTEGER,
-              quantity INTEGER NOT NULL,
-              FOREIGN KEY(pid) REFERENCES products(id))");
-  } catch (PDOException $e) {
-    die ('エラー：'.$e->getMessage());
-  }
+try {
+  $pdo = new PDO($dsn, $dbuser, $dbpass); //MySQL
+  //$pdo = new PDO("sqlite:./db/users.db"); //SQLite
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+  $pdo->query("CREATE TABLE IF NOT EXISTS users (
+    username VARCHAR(256) PRIMARY KEY,
+    email VARCHAR(256),
+    password VARCHAR(256))");
+} catch (PDOException $e) {
+  die ('エラー：'.$e->getMessage());
+}

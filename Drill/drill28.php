@@ -1,39 +1,34 @@
 <?php
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $question = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    $correct = [];
-    if (isset($_POST['question'])) { //問題作成
-      $question = str_split($question);
-      $num = $_POST['chars'];
-      while ($num > 0) {
-        $n = array_rand($question);
-        $correct[] = $question[$n];
-        unset($question[$n]);
-        $num -= 1;
-      }
-      //問題と正解をCookieに保存(有効期限10分)
-      setcookie("question", implode('',$question), time()+600, "/");
-      setcookie("correct", implode('',$correct), time()+600, "/");
-      setcookie("start_time", microtime(true), time()+600, "/");
-    } else if (isset($_POST['answer'])) {
-      //問題と正解をCookieから取得
-      $question = str_split($_COOKIE['question']);
-      $correct = str_split($_COOKIE['correct']);
-      $start_time = (int)$_COOKIE['start_time'];
-      $answer = explode(",",$_POST['answer']); //入力した答えを取得
-      $answer = array_map('strtoupper',$answer);
-      $flag = true;
-      foreach ($correct as $cor) { //判定
-        if (array_search($cor, $answer)===false) $flag = false;
-      }
-      if ($flag) {
-        $result = '正解です。['.implode(',',$correct).']';
-        $exec_time = (int)microtime(true) - $start_time;
-      } else {
-        $result = '不正解です。正解は['.implode(',',$correct).']';
-      }
+$filename = 'users.json';
+$users = array();
+if (file_exists($filename)) {
+  $json = file_get_contents($filename);
+  $users = json_decode($json,true);
+}
+$errors = array();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $username = $_POST['username'] ?? '';
+  if (isset($json) && isset($users)) {
+    if (in_array($username, array_keys($users))) {
+      $errors[] = '登録済みのユーザーです';
     }
   }
+  $email = $_POST['email'] ?? '';
+  if (preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email) !== 1) {
+    $errors[] = '無効なメールアドレスです。';
+  }
+  $password = $_POST['password'] ?? null;
+  if (preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!-\/:-@[-`{-~])[!-~]{8,32}$/', $password) !== 1) {
+      $errors[] = 'パスワードは8~32文字で大小文字英字数字記号をそれぞれ1文字以上含める必要があります。';
+  }
+  if (count($errors) == 0) {
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    $users[$username] = array($email,$password);
+    $json = json_encode($users);
+    file_put_contents($filename, $json);
+    $success = '登録しました。';
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -43,29 +38,22 @@
   <title>PHPドリル</title>
 </head>
 <body>
-  <h1>アルファベットクイズ</h1>
-  <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') { ?>
-    <p>抜けているアルファベットはどれ？(<?php echo count($correct).'文字ぬけている' ?>)</p>
-    <p style="font-size:32px;"><?php echo implode("", $question); ?></p>
-    <form method="POST">
-      <label>答え：<input type="text" name="answer"></label><br>
-      <br>
-      <button type="submit">送信</button>
-    </form>
-    <h2>結果表示</h2>
-    <p><?= $result ?? '' ?></p>
-    <?php if (isset($exec_time)) { ?>
-      <p><?= 'かかった時間は'.$exec_time.'秒です。' ?></p>
+  <h2>ユーザー登録</h2>
+  <?php if ($errors) { ?>
+    <ul style="color:red;">
+    <?php foreach ($errors as $error) { ?>
+      <li><?php echo $error; ?></li>
     <?php } ?>
-    <p><a href="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">トップ</a></p>
-  <?php } else { ?>
-    <form method="POST">
-      <p>隠すアルファベットの数：</p>
-      <p><label><input type="radio" name="chars" value=1 checked>1文字</label>
-      <label><input type="radio" name="chars" value=2>2文字</label>
-      <label><input type="radio" name="chars" value=3>3文字</label></p>
-      <p><button type="submit" name="question">出題</button></p>
-    </form>
+    </ul>
+  <?php } ?>
+  <form method="POST">
+    <p><label>ユーザー名：<input type="text" name="username" required></label></p>
+    <p><label>メールアドレス：<input type="text" name="email" required></label></p>
+    <p><label>パスワード：<input type="text" name="password" required></label></p>
+    <p><button type="submit">登録</button>
+  </form>
+  <?php if (isset($success)) { ?>
+    <p><?php echo $success; ?></p>
   <?php } ?>
 </body>
 </html>

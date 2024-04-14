@@ -1,20 +1,54 @@
 <?php
-session_start();
-
-if (isset($_POST['login'])) {
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-  if ($password == '1234') {
-    $_SESSION['username'] = $username;
-  } else {
-    $error = 'ログイン失敗';
+$pc_makers = array('Lenovo','DELL','HP','Apple','Dynabook','NEC','VAIO','ASUS','Acer','自作PC','その他');
+$langs = array('PHP','JavaScript','Python','Java','C/C++','C#','Ruby');
+$errors = array();
+$normal = '';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if (file_exists('survey.csv')) {
+    $fp = fopen('survey.csv', 'r');
+    $survey = array();
+    while ((!feof($fp)) && ($info = fgetcsv($fp))) {
+      $survey[] = $info;
+    }
+    fclose($fp);
   }
-} else if (isset($_POST['logout']) && isset($_SESSION['username'])) {
-  $username = $_SESSION['username'];
-  unset($_SESSION['username']);
-  $logout = 'ログアウトしました。';
-} else if (isset($_SESSION['username'])) {
-  $username = $_SESSION['username'];
+  $name = $_POST['name'] ?? '';
+  $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+  if ($email == null || $email == false) {
+    $email = $_POST['email'];
+    $errors[] = '正しいメールアドレスを入力してください。';
+  } else {
+    if (isset($survey)) {
+      foreach ($survey as $info) {
+        if ($email == $info[1]) {
+          $errors[] = 'ユーザーはすでに送信済です。';
+        }
+      }
+    }
+  }
+  $age = $_POST['age'] ?? '';
+  $language = implode("|", $_POST['langs'] ?? []);
+  $pc = $_POST['pc'] ?? '';
+  $maker = $_POST['maker'] ?? '';
+  if (empty($maker)) {
+    $errors[] = 'PCメーカーを選択してください。';
+  }
+  $comments = $_POST['comments'] ?? '';
+  if (empty($errors)) {
+    $normal = '送信しました。';
+    if (isset($survey)) {
+      $survey[] = array($name,$email,$age,$language,$pc,$maker,$comments);
+    } else {
+      $survey = array();
+      $survey[] = array('名前','メールアドレス','年齢','興味のあるプログラミング言語','学習に使っているパソコン','パソコンメーカー','コメント');
+      $survey[] = array($name,$email,$age,$language,$pc,$maker,$comments);
+    }
+    $fp = fopen('survey.csv', 'w');
+    foreach ($survey as $fields) {
+      fputcsv($fp, $fields);
+    }
+    fclose($fp);
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -25,26 +59,56 @@ if (isset($_POST['login'])) {
   <title>PHPドリル</title>
 </head>
 <body>
-  <h1>ログインとセッション</h1>
-  <?php
-  if (isset($error)) {
-    print '<p>'.$error.'</p>';
-  }
-  ?>
-  <?php if (!isset($_SESSION['username'])) {
-    if (isset($logout)) {
-      print $username . ' ' . $logout;
-    } ?>
-    <form method="POST">
-      <p><label>ユーザー名：<input type="text" name="username" required></label><br>
-      <label>パスワード：<input type="password" name="password" required></label></p>
-      <p><button type="submit" name="login" style="margin-right:10px">ログイン</button></p>
-    </form>
-  <?php } else {
-    print '<p>' . $username . ' ログイン中です。</p>';
-    print '<form method="POST">';
-    print '<button type="submit" name="logout">ログアウト</button>';
-    print '</form>';
-  } ?>
+  <h2>アンケート</h2>
+  <?php if ($errors) { ?>
+    <ul>
+      <?php foreach ($errors as $err) { ?>
+        <li><?= $err ?></li>
+      <?php } ?>
+    </ul>
+  <?php } ?>
+  <?php if ($normal) { ?>
+    <ul><li><?= $normal ?></li></ul>
+  <?php } ?>
+  <form method="POST">
+  <table>
+    <tr><td><label for="name">名前：</label></td><td><input type="text" name="name" id="name" value="<?= $name ?? '' ?>" required></td></tr>
+    <tr><td><label for="email">メールアドレス：</label></td><td><input type="email" name="email" id="email"  value="<?= $email ?? '' ?>" required></td></tr>
+    <tr><td><label for="age">年齢：</label></td><td><input type="number" name="age" id="age" min="18" max="110"  value="<?= $age ?? '' ?>" required></td></tr>
+    <tr><td>興味のある<br>プログラム言語：</td>
+    <td>
+      <?php foreach ($langs as $lang) { ?>
+        <?php
+        $checked = '';
+        if (isset($_POST['langs']) && in_array($lang,$_POST['langs'])) {
+          $checked = 'checked';
+        }
+        ?>
+        <label><input type="checkbox" name="langs[]" value="<?= $lang ?>" <?= $checked ?>><?= $lang ?></label>
+      <?php } ?>
+    </td></tr><tr><td>学習に使われる<br>パソコン：</td>
+    <td>
+      <?php $checked = $_POST['pc'] ?? 'デスクトップPC' ?>
+      <label><input type="radio" name="pc" value="デスクトップPC" <?= $checked == 'デスクトップPC' ? 'checked' : '' ?>>デスクトップPC</label>
+      <label><input type="radio" name="pc" value="ノートPC" <?= $checked == 'ノートPC' ? 'checked' : '' ?>>ノートPC</label>
+    </td></tr>
+    <tr><td>パソコンメーカー：</td>
+    <td>
+      <select name="maker" required>
+        <option value="">選択してください。</option>
+        <?php foreach ($pc_makers as $value) { ?>
+          <?php $selected = '';
+          if (isset($maker) && $maker==$value) {
+            $selected = 'selected';
+          } ?>
+          <option value="<?= $value ?>" <?= $selected ?>><?= $value ?></option>
+        <?php } ?>
+      </select>
+    </td></tr>
+    <tr><td>コメント：</td><td><textarea name="comments" rows="3" cols="30"><?= $comments ?? '' ?></textarea></td></tr>
+  </table>
+  <br>
+  <button type="submit">送信</button>
+  </form>
 </body>
 </html>

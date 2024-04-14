@@ -1,20 +1,8 @@
 <?php
-  $dsn = 'mysql:host=mysql;dbname=productdb';
-  $user = 'root';
-  $password = 'password';
-
+  require_once 'config.php';
   $products = array();
 
   try {
-    //$db = new PDO("sqlite:./db/product.db");
-    $db = new PDO($dsn, $user, $password);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $db->exec("CREATE TABLE IF NOT EXISTS products(
-              id INTEGER PRIMARY KEY AUTO_INCREMENT,
-              product VARCHAR(256) NOT NULL,
-              price INTEGER NOT NULL)");
-
     if (isset($_POST['submit'])) {
       $product = $_POST['product'];
       $price = $_POST['price'];
@@ -23,6 +11,13 @@
       $stmt->bindParam(':price', $price, PDO::PARAM_INT);
       $stmt->execute();
       $info = '登録しました。';
+    } else if (isset($_POST['delete'])) {
+      $id = $_POST['id'];
+      $product = $_POST['product'];
+      $stmt = $db->prepare("DELETE FROM products WHERE id=:id");
+      $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+      $stmt->execute();
+      $info = $id . ':' . $product . 'を削除しました。';
     }
 
     $q = $db->query("SELECT * FROM products");
@@ -47,7 +42,8 @@
   <title>PHPドリル</title>
 </head>
 <body>
-  <h1>データベース①</h1>
+  <h1>データベース②</h1>
+  <h2>製品登録</h2>
   <?php if (isset($info)) {
     print '<p>' . $info . '</p>';
   } ?>
@@ -56,8 +52,9 @@
     <label>価格(円)：<input type="number" name="price" required></label></p>
     <button type="submit" name="submit">登録</button>
   </form>
+  <p><a href="oder.php">注文画面</a></p>
   <hr>
-  <h2>製品一覧</h2>
+  <p>製品一覧</p>
   <?php if (!empty($products)) { ?>
     <table border="1">
       <thead>
@@ -65,13 +62,19 @@
           <th>番号</th>
           <th>製品</th>
           <th>価格(円)</th>
+          <th>処理</th>
         </tr>
       </thead>
       <tbody>
         <?php foreach ($products as $p) {
           print '<tr><td>' . $p['id'] . '</td>';
           print '<td>' . $p['product'] . '</td>';
-          print '<td>' . $p['price'] . '</td></tr>';
+          print '<td>' . $p['price'] . '</td>';
+          print '<td><form method="POST">';
+          print '<input type="hidden" name="id" value="' . $p['id'] . '">';
+          print '<input type="hidden" name="product" value="' . $p['product'] . '">';
+          print '<button type="submit" name="delete">削除</button>';
+          print '</form></td></tr>';
         } ?>
       </tbody>
     </table>

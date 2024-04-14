@@ -1,29 +1,39 @@
 <?php
-session_start();
-$products = [
-  ['name' => '商品1', 'price' => 1000, 'quantity' => 0],
-  ['name' => '商品2', 'price' => 2000, 'quantity' => 0],
-  ['name' => '商品3', 'price' => 3000, 'quantity' => 0]
-];
-
-if (isset($_POST['add_to_cart'])) {
-  if (!isset($_SESSION['cart'])) {
-      $_SESSION['cart'] = [];
-  }
-  $product_id = $_POST['product_id'] ?? [];
-  foreach ($product_id as $id) {
-    $products[$id]['quantity'] = $_POST['quantity'.$id];
-    if (empty($_SESSION['cart'][$id])) {
-      $_SESSION['cart'][$id] = $products[$id];
-    } else {
-      $_SESSION['cart'][$id]['quantity'] += $products[$id]['quantity'];
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $question = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $correct = [];
+    if (isset($_POST['question'])) { //問題作成
+      $question = str_split($question);
+      $num = $_POST['chars'];
+      while ($num > 0) {
+        $n = array_rand($question);
+        $correct[] = $question[$n];
+        unset($question[$n]);
+        $num -= 1;
+      }
+      //問題と正解をCookieに保存(有効期限10分)
+      setcookie("question", implode('',$question), time()+600, "/");
+      setcookie("correct", implode('',$correct), time()+600, "/");
+      setcookie("start_time", microtime(true), time()+600, "/");
+    } else if (isset($_POST['answer'])) {
+      //問題と正解をCookieから取得
+      $question = str_split($_COOKIE['question']);
+      $correct = str_split($_COOKIE['correct']);
+      $start_time = (int)$_COOKIE['start_time'];
+      $answer = explode(",",$_POST['answer']); //入力した答えを取得
+      $answer = array_map('strtoupper',$answer);
+      $flag = true;
+      foreach ($correct as $cor) { //判定
+        if (array_search($cor, $answer)===false) $flag = false;
+      }
+      if ($flag) {
+        $result = '正解です。['.implode(',',$correct).']';
+        $exec_time = (int)microtime(true) - $start_time;
+      } else {
+        $result = '不正解です。正解は['.implode(',',$correct).']';
+      }
     }
   }
-}
-
-if (isset($_POST['del_from_cart'])) {
-  unset($_SESSION['cart']);
-}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -33,32 +43,29 @@ if (isset($_POST['del_from_cart'])) {
   <title>PHPドリル</title>
 </head>
 <body>
-  <h1>ショッピングカート</h1>
-
-  <h2>商品一覧</h2>
-  <form method="POST">
-    <?php foreach ($products as $id => $product) { ?>
-      <label>
-        <input type="checkbox" name="product_id[]" value="<?= $id ?>">
-        <?= $product['name'] ?> (<?= $product['price'] ?>円)
-      </label>
-      <label><input type="number" name="quantity<?= $id ?>" min="1" max="10" value="1">個</label>
+  <h1>アルファベットクイズ</h1>
+  <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') { ?>
+    <p>抜けているアルファベットはどれ？(<?php echo count($correct).'文字ぬけている' ?>)</p>
+    <p style="font-size:32px;"><?php echo implode("", $question); ?></p>
+    <form method="POST">
+      <label>答え：<input type="text" name="answer"></label><br>
       <br>
+      <button type="submit">送信</button>
+    </form>
+    <h2>結果表示</h2>
+    <p><?= $result ?? '' ?></p>
+    <?php if (isset($exec_time)) { ?>
+      <p><?= 'かかった時間は'.$exec_time.'秒です。' ?></p>
     <?php } ?>
-    <p><button type="submit" name="add_to_cart">カートに追加</button></p>
-  </form>
-
-  <h2>カート</h2>
-  <?php if (isset($_SESSION['cart'])) {
-    $total_price = 0;
-      foreach ($_SESSION['cart'] as $product) {
-        $total_price += $product['price']*$product['quantity']; ?>
-      <?= $product['name'] ?> (<?= $product['price'] ?>円) x <?= $product['quantity'] ?>個<br>
-    <?php } ?>
-    合計: <?= $total_price*1.1 ?>円(税込)<br>
-    <form method="POST"><button type="submit" name="del_from_cart">カートを空にする</button></form>
+    <p><a href="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">トップ</a></p>
   <?php } else { ?>
-    <p>カートに商品はありません。</p>
+    <form method="POST">
+      <p>隠すアルファベットの数：</p>
+      <p><label><input type="radio" name="chars" value=1 checked>1文字</label>
+      <label><input type="radio" name="chars" value=2>2文字</label>
+      <label><input type="radio" name="chars" value=3>3文字</label></p>
+      <p><button type="submit" name="question">出題</button></p>
+    </form>
   <?php } ?>
 </body>
 </html>
