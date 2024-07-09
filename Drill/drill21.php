@@ -1,6 +1,6 @@
 <?php
   if (!isset($_GET['page'])) {
-    header('Location: gallery.php?page=1');
+    header('Location: drill21.php?page=1');
     exit;
   }
   $images = array();
@@ -35,7 +35,7 @@
     print '<p>';
     for ($i=1; $i<=count($images); $i++) { //ページネーション
       if ($_GET['page'] != $i) {
-        print '<span style="margin:5px;"><a href="gallery.php?page=' . $i . '">' . $i . '</a></span>';
+        print '<span style="margin:5px;"><a href="drill21.php?page=' . $i . '">' . $i . '</a></span>';
       } else {
         print '<span style="margin:5px;">'.$i.'</span>';
       }
